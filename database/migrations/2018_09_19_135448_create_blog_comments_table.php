@@ -14,7 +14,7 @@ class CreateBlogCommentsTable extends Migration {
 			$table->timestamps();
 			$table->softDeletes();
 			$table->string('ip', 15)->index();
-			$table->string('user_agent', 255);
+			$table->string('user_agent');
 		});
 	}
 

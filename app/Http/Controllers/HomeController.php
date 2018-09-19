@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Modules\Blog\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class HomeController extends Controller
 {
@@ -24,6 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $lang = LaravelLocalization::getCurrentLocale();
+        $post = Post::where('lang',$lang)->orderBy('created_at','desc')->limit(4)->get();
+        return view('home',compact('post'));
     }
 }

@@ -25,9 +25,9 @@ class CategoryTableSeeder extends Seeder {
 
 		// Test category - 3
 		Category::create(array(
-				'name' => Test category - 3,
-				'slug' => test-category-3,
-				'description' => Test category - 3 Meta Desc
+				'name' => 'Test category - 3',
+				'slug' => 'test-category-3',
+				'description' => 'Test category - 3 Meta Desc'
 			));
 
 		// Test category - 4

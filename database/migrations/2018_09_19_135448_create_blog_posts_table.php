@@ -10,15 +10,15 @@ class CreateBlogPostsTable extends Migration {
 		Schema::create('blog_posts', function(Blueprint $table) {
 			$table->increments('id');
 			$table->tinyInteger('category_id')->unsigned()->index();
-			$table->string('title', 255);
-			$table->string('slug', 255)->unique();
-			$table->string('description', 255)->nullable();
+			$table->string('title');
+			$table->string('slug')->unique();
+			$table->string('description')->nullable();
 			$table->text('summary');
 			$table->text('content');
 			$table->enum('status', array('draft', 'publish'))->index();
 			$table->boolean('comments')->index();
-			$table->boolean('featured')->index();
 			$table->string('lang')->default('fr');
+			$table->integer('uid');
 			$table->timestamps();
 			$table->softDeletes();
 		});

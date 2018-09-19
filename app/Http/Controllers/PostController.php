@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Modules\Blog\Models\Post;
 use Illuminate\Http\Request;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class PostController extends Controller 
 {
@@ -14,7 +16,7 @@ class PostController extends Controller
    */
   public function index()
   {
-    
+
   }
 
   /**
@@ -43,9 +45,14 @@ class PostController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function show($id)
+  public function show(Post $post)
   {
-    
+      $lang = LaravelLocalization::getCurrentLocale();
+      if($post->lang == $lang){
+          return view('blog.show',compact('post'));
+
+      }
+        abort(404);
   }
 
   /**
@@ -80,7 +87,8 @@ class PostController extends Controller
   {
     
   }
-  
+
+
 }
 
 ?>

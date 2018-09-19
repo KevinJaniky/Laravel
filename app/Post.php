@@ -2,12 +2,13 @@
 
 namespace App\Modules\Blog\Models;
 
+use App\Presenters\DatePresenter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model 
 {
-
+    use DatePresenter;
     protected $table = 'blog_posts';
     public $timestamps = true;
 
@@ -31,4 +32,12 @@ class Post extends Model
         return $this->belongsToMany('PostTag');
     }
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    public function user(){
+        return $this->hasOne('App\User','id','uid');
+    }
 }

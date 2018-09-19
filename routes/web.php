@@ -24,5 +24,5 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
 {
     Route::get('/','HomeController@index');
     Route::get('home','HomeController@index');
-
+    Route::get('blog/{post}','PostController@show')->name('blog.show');
 });

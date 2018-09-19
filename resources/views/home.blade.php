@@ -1,31 +1,29 @@
 @extends('layouts.app')
-
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                        <ul>
-                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                <li>
-                                    <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                        {{ $properties['native'] }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    You are logged in! {{ LaravelLocalization::getCurrentLocale() }}
-                </div>
-            </div>
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">{{ trans('home.welcome') }}</h1>
+            <p class="lead text-muted">{{ Helpers::getInformation('home.about')  }}</p>
         </div>
-    </div>
-</div>
+    </section>
+
+    <section class="container">
+        <h2>{{ trans('home.last-blog') }}</h2>
+        <div class="row">
+            @foreach($post as $p)
+                <article class="col-md-3" style="padding: 5px !important; ">
+                    <div class="card">
+                        <img class="card-img-top" src="https://picsum.photos/280/220/?random" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{$p->title}}</h5>
+                            <p class="card-text">{{$p->summary}}</p>
+                            <a href="{{ route('blog.show',[$p->slug]) }}" class="btn btn-primary">{{ trans('home.see-more') }}</a>
+                        </div>
+                    </div>
+                </article>
+            @endforeach
+        </div>
+    </section>
+
+
 @endsection
