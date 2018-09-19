@@ -13,15 +13,16 @@
 
 
 Auth::routes();
+Route::resource('category', 'CategoryController');
+Route::resource('post', 'PostController');
+Route::resource('comment', 'CommentController');
+Route::resource('posttag', 'PostTagController');
+Route::resource('tag', 'TagController');
 
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function()
 {
-    Route::get('/', function()
-    {
-        return view('welcome');
-    });
-
-
+    Route::get('/','HomeController@index');
     Route::get('home','HomeController@index');
+
 });
